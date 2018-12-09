@@ -38,15 +38,15 @@ def get_image_for_instagram(path, filename, dir_insta):
 
 
 if (__name__ == '__main__'):
-    dir = 'images'
+    img_dir = 'images'
     dir_insta = 'images/for_instagram'
     load_dotenv()
     login = os.getenv('LOGIN')
     password = os.getenv('PASSWORD')
     bot = Bot()
     bot.login(username=login, password=password)
-    for entry in os.listdir(dir):
-        path = os.path.join(dir, entry)
+    for entry in os.listdir(img_dir):
+        path = os.path.join(img_dir, entry)
         if not os.path.isdir(path):
             path_new = get_image_for_instagram(path, entry, dir_insta)
             caption = ''
