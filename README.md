@@ -1,11 +1,9 @@
 # Space Instagram
 
-[TODO: here would be project description]
+First script, the **fetch_spacex.py** fetches photos of the latest launch of [SpaceX program](https://www.spacex.com/). The second, **fetch_hubble.py** fetches photos of [The Hubble Telescope](http://hubblesite.org/), collection "news". And the third, **upload_to_instagram.py** prepares and publishes photos to Instagram account.
 
 
 ### How to install
-
-[TODO: tell user where he should get keys, where they should be and how they look like]
 
 Python3 should be already installed. 
 Then use `pip` (or `pip3`, if there is a conflict with Python2) to install dependencies:
@@ -13,10 +11,16 @@ Then use `pip` (or `pip3`, if there is a conflict with Python2) to install depen
 pip install -r requirements.txt
 ```
 
+.env file with enviroment variables should contain your password and login to Instagram.
+```
+LOGIN=your_login
+PASSWORD=your_passwod
+```
+
 
 ### Quickstart
 
-First script, the **fetch_spacex.py** fetches photos of the latest launch of [SpaceX program](https://www.spacex.com/). The second, **fetch_hubble.py** fetches photos of [The Hubble Telescope](http://hubblesite.org/), collection "news". And the third, **upload_to_instagram.py** prepares and publishes photos to Instagram account.
+Run **fetch_spacex.py** or/and **fetch_hubble.py** to fetch photos, wich will be save in **image** folder. Then run **upload_to_instagram.py** it prepares photos in the **images/for_instagram** folder and uploads them to Instagram account.
 
 
 ### Project Goals
