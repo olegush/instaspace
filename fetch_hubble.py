@@ -4,8 +4,8 @@ import json
 
 
 def fetch_hubble_image(url, id):
-    request = requests.get(url + str(id))
-    json_data = json.loads(request.text)['image_files']
+    response = requests.get(url + str(id))
+    json_data = json.loads(response.text)['image_files']
     json_data_max = max(
         json_data,
         key=lambda size: size['width'] * size['height']
@@ -14,27 +14,26 @@ def fetch_hubble_image(url, id):
 
 
 def download_image(url, dir, filename):
-    request = requests.get(url)
+    response = requests.get(url)
     if not os.path.isdir(dir):
         os.mkdir(dir)
     with open(os.path.join(dir, filename), 'wb') as file:
-        file.write(request.content)
+        file.write(response.content)
 
 
 def get_file_ext(url):
-    filename = os.path.split(url)[1]
-    return os.path.splitext(filename)[1]
+    return os.path.splitext(url)[1]
 
 
 if (__name__ == '__main__'):
-    dir = 'images'
+    img_dir = 'images'
     hubble_api_img = 'http://hubblesite.org/api/v3/image/'
     hubble_api_collection = 'http://hubblesite.org/api/v3/images'
     params = {'page': 1, 'collection_name': 'news'}
-    request = requests.get(hubble_api_collection, params=params)
-    for img in json.loads(request.text):
+    response = requests.get(hubble_api_collection, params=params)
+    for img in json.loads(response.text):
         hubble_img_url = fetch_hubble_image(hubble_api_img, img['id'])
         hubble_img_ext = get_file_ext(hubble_img_url)
-        filename = 'hubble_' + str(img['id']) + hubble_img_ext
-        download_image(hubble_img_url, dir, filename)
+        filename = 'hubble_{}{}'.format(str(img['id']), hubble_img_ext)
+        download_image(hubble_img_url, img_dir, filename)
         print('{} was saved as {}'.format(hubble_img_url, filename))
